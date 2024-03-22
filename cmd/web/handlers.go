@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"snippetbox/internal/models"
 	"strconv"
+	"strings"
+	"unicode/utf8"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
@@ -66,6 +68,27 @@ func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request
 	expires, err := strconv.Atoi(r.PostForm.Get("expires"))
 	if err != nil {
 		app.clientError(w, http.StatusBadRequest)
+		return
+	}
+
+	fieldsErrors := make(map[string]string)
+
+	if strings.TrimSpace(title) == "" {
+		fieldsErrors["title"] = "This field cannot be blanked"
+	} else if utf8.RuneCountInString(title) > 100 {
+		fieldsErrors["title"] = "Title cannot be longer than 100 characters"
+	}
+
+	if strings.TrimSpace(content) == "" {
+		fieldsErrors["content"] = "This field cannot be blank"
+	}
+
+	if expires != 1 && expires != 7 && expires != 365 {
+		fieldsErrors["expires"] = "This field must equal 1, 7 or 365"
+	}
+
+	if len(fieldsErrors) > 0 {
+		fmt.Fprint(w, fieldsErrors)
 		return
 	}
 
