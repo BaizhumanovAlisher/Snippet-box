@@ -24,3 +24,7 @@ This project is in a progress and will be released soon.
 - user accounts
 - secured http
 - authentication
+- 
+
+# Attention!
+Later will be added docker file and docker - compose
