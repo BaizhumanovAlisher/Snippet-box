@@ -19,12 +19,12 @@ This project is in a progress and will be released soon.
 - displaying dynamic data
 - serving static files for front-end
 - session management
+- authentication
 
 
 ### Features in the future:
 - user accounts
 - secured http
-- authentication
 
 # Attention!
 Later will be added docker file and docker - compose
