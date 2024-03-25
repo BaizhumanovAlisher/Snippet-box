@@ -12,6 +12,7 @@ This project is in a progress and will be released soon.
 - http server
   - routing
   - logging
+  - tls
 - connection to database
 - creating and saving snippets
 - viewing snippets
