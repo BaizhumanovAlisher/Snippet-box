@@ -48,6 +48,13 @@ func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
 	app.render(w, http.StatusOK, "view.html", data)
 }
 
+type snippetCreateForm struct {
+	Title               string `form:"title"`
+	Content             string `form:"content"`
+	Expires             int    `form:"expires"`
+	validator.Validator `form:"-"`
+}
+
 func (app *application) snippetCreate(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
 
@@ -90,10 +97,10 @@ func (app *application) snippetCreatePost(w http.ResponseWriter, r *http.Request
 	http.Redirect(w, r, fmt.Sprintf("/snippet/view/%d", id), http.StatusSeeOther)
 }
 
-type snippetCreateForm struct {
-	Title               string `form:"title"`
-	Content             string `form:"content"`
-	Expires             int    `form:"expires"`
+type userSignupForm struct {
+	Name                string `form:"name"`
+	Email               string `form:"email"`
+	Password            string `form:"password"`
 	validator.Validator `form:"-"`
 }
 
@@ -158,11 +165,4 @@ func (app *application) userLoginPost(w http.ResponseWriter, r *http.Request) {
 func (app *application) userLogoutPost(w http.ResponseWriter, r *http.Request) {
 	//todo
 	fmt.Fprintln(w, "Logout the user...")
-}
-
-type userSignupForm struct {
-	Name                string `form:"name"`
-	Email               string `form:"email"`
-	Password            string `form:"password"`
-	validator.Validator `form:"-"`
 }
