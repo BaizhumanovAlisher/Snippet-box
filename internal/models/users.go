@@ -68,7 +68,7 @@ func (m *UserModel) Authenticate(email, password string) (int, error) {
 		}
 	}
 
-	return 0, nil
+	return id, nil
 }
 
 func (m *UserModel) Exists(id int) (bool, error) {
