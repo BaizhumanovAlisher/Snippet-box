@@ -28,3 +28,10 @@ This project is in a progress and will be released soon.
 
 # Attention!
 Later will be added docker file and docker - compose
+
+# TODO list
+- add `/about` page
+- Debug mode
+- Add an ‘Account’ page to the application
+- Redirect user appropriately after login
+- Implement a ‘Change Password’ feature
