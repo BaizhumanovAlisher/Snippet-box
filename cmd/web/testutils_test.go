@@ -21,7 +21,10 @@ import (
 var csrfTokenRX = regexp.MustCompile(`<input type='hidden' name='csrf_token' value='(.+)'>`)
 
 func newTestApplication(t *testing.T) *application {
-	templateCache, err := newTemplateCache()
+	//todo: move const value
+	pathUI := "/home/my_pc/workspaces/go projects/snippetbox/ui/"
+
+	templateCache, err := newTemplateCache(pathUI)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -30,6 +30,7 @@ type application struct {
 func main() {
 	addr := flag.String("addr", ":4000", "HTTP network address")
 	dsn := flag.String("dsn", "web:pass@/snippetbox?parseTime=true", "MySQL data source name")
+	pathUI := flag.String("path_ui", "/home/my_pc/workspaces/go projects/snippetbox/ui/", "Path root of UI files")
 
 	flag.Parse()
 
@@ -42,7 +43,7 @@ func main() {
 	}
 	defer db.Close()
 
-	templateCache, err := newTemplateCache()
+	templateCache, err := newTemplateCache(*pathUI)
 	if err != nil {
 		errorLog.Fatal(err)
 	}

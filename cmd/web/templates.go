@@ -29,10 +29,10 @@ var functions = template.FuncMap{
 	"humanDate": humanDate,
 }
 
-func newTemplateCache() (map[string]*template.Template, error) {
+func newTemplateCache(pathUI string) (map[string]*template.Template, error) {
 	cache := make(map[string]*template.Template)
 
-	pages, err := filepath.Glob("./ui/html/pages/*.html")
+	pages, err := filepath.Glob(pathUI + "html/pages/*.html")
 	if err != nil {
 		return nil, err
 	}
@@ -40,12 +40,12 @@ func newTemplateCache() (map[string]*template.Template, error) {
 	for _, page := range pages {
 		name := filepath.Base(page)
 
-		ts, err := template.New(name).Funcs(functions).ParseFiles("./ui/html/base.html")
+		ts, err := template.New(name).Funcs(functions).ParseFiles(pathUI + "html/base.html")
 		if err != nil {
 			return nil, err
 		}
 
-		ts, err = ts.ParseGlob("./ui/html/partials/*.html")
+		ts, err = ts.ParseGlob(pathUI + "html/partials/*.html")
 		if err != nil {
 			return nil, err
 		}
